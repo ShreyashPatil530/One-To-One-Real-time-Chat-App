@@ -12,8 +12,15 @@ import { cn } from "@/lib/utils";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 
-export default function ChatPanel({ conversationId, onBack }: any) {
-    const conversation = useQuery(api.conversations.getConversations)?.find(c => c._id === conversationId);
+import { Id } from "../../../convex/_generated/dataModel";
+
+interface ChatPanelProps {
+    conversationId: Id<"conversations"> | null;
+    onBack: () => void;
+}
+
+export default function ChatPanel({ conversationId, onBack }: ChatPanelProps) {
+    const conversation = useQuery(api.conversations.getConversations)?.find((c: any) => c._id === conversationId);
     const markAsRead = useMutation(api.messages.markAsRead);
     const me = useQuery(api.users.getMe);
 

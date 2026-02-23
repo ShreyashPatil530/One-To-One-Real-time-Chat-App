@@ -7,8 +7,10 @@ import ChatPanel from "@/components/chat/ChatPanel";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { Id } from "../../convex/_generated/dataModel";
+
 export default function ChatPage() {
-  const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
+  const [activeConversationId, setActiveConversationId] = useState<Id<"conversations"> | null>(null);
 
   return (
     <main className="flex h-screen overflow-hidden bg-[#0a0a0b] selection:bg-purple-500/30">

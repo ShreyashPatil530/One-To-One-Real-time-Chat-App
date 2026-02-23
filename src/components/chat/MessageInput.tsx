@@ -8,13 +8,15 @@ import { Send, Smile, Paperclip, MoreHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-export default function MessageInput({ conversationId }: any) {
+import { Id } from "../../../convex/_generated/dataModel";
+
+export default function MessageInput({ conversationId }: { conversationId: Id<"conversations"> }) {
     const [content, setContent] = useState("");
     const sendMessage = useMutation(api.messages.sendMessage);
     const setTyping = useMutation(api.typing.setTyping);
     const typingIndicators = useQuery(api.typing.getTypingIndicators, { conversationId }) || [];
 
-    const typingTimeoutRef = useRef<NodeJS.Timeout>();
+    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleSend = async (e?: any) => {
         if (e) e.preventDefault();

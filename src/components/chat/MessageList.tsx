@@ -9,7 +9,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronDown, CheckCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function MessageList({ conversationId, meId }: any) {
+import { Id } from "../../../convex/_generated/dataModel";
+
+interface MessageListProps {
+    conversationId: Id<"conversations">;
+    meId: Id<"users"> | undefined;
+}
+
+export default function MessageList({ conversationId, meId }: MessageListProps) {
     const messages = useQuery(api.messages.getMessages, { conversationId }) || [];
     const scrollRef = useRef<HTMLDivElement>(null);
     const [showScrollButton, setShowScrollButton] = useState(false);
@@ -58,10 +65,10 @@ export default function MessageList({ conversationId, meId }: any) {
             <ScrollArea
                 ref={scrollRef}
                 className="h-full px-4"
-                onScrollCapture={handleScroll as any}
+                onScrollCapture={handleScroll}
             >
                 <div className="flex flex-col gap-3 py-6 min-h-full justify-end">
-                    {messages.map((msg, index) => {
+                    {messages.map((msg: any, index: number) => {
                         const isMe = msg.senderId === meId;
                         const prevMsg = messages[index - 1];
                         const showTime = !prevMsg || (msg._creationTime - prevMsg._creationTime > 60000);

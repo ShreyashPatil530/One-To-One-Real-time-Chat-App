@@ -12,7 +12,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-export default function Sidebar({ onSelectConversation, activeConversationId }: any) {
+import { Id } from "../../../convex/_generated/dataModel";
+
+interface SidebarProps {
+    onSelectConversation: (id: Id<"conversations">) => void;
+    activeConversationId: Id<"conversations"> | null;
+}
+
+export default function Sidebar({ onSelectConversation, activeConversationId }: SidebarProps) {
     const { signOut, user } = useClerk();
     const [searchTerm, setSearchTerm] = useState("");
     const [view, setView] = useState<"conversations" | "users">("conversations");
@@ -21,7 +28,7 @@ export default function Sidebar({ onSelectConversation, activeConversationId }: 
     const allUsers = useQuery(api.users.getUsers, { searchTerm }) || [];
     const startConversation = useMutation(api.conversations.getOrCreateConversation);
 
-    const handleStartChat = async (userId: any) => {
+    const handleStartChat = async (userId: Id<"users">) => {
         const id = await startConversation({ participantId: userId });
         onSelectConversation(id);
         setView("conversations");
