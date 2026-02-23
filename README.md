@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChatPulse | Premium Real-time One-to-One Chat
 
-## Getting Started
+ChatPulse is a high-performance, aesthetically pleasing real-time chat application built for modern connectivity. It leverages the power of Next.js 15, Convex, and Clerk to provide a seamless messaging experience.
 
-First, run the development server:
+## 📐 System Architecture
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```mermaid
+graph TD
+    A[User / Browser] -->|Auth| B(Clerk)
+    A -->|Next.js App Router| C{Frontend}
+    C -->|Real-time Subscriptions| D[Convex Backend]
+    D -->|Persistent Storage| E[(Convex Database)]
+    D -->|Mutations/Queries| F[Business Logic]
+    C -->|User Metadata Sync| D
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Flow Breakdown:
+1. **Authentication**: Handled by Clerk. User identity is protected at the Edge via middleware.
+2. **Real-time Engine**: Convex manages state using a subscription model. Any change in the database (new message, typing status) is instantly pushed to the UI.
+3. **Database**: Managed by Convex (Serverless database) with custom indexes for high-speed lookups.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features
 
-## Learn More
+- **Real-time Messaging**: Instant delivery and reactive updates.
+- **Dynamic User Search**: Live person discovery with filtering.
+- **Typing Indicators**: Visual feedback when someone is replying.
+- **Unread Counters**: Real-time badges for missed messages.
+- **Smart Auto-Scroll**: Intelligent chat window management.
+- **Premium UI/UX**: 
+  - Framer Motion animations.
+  - Dark-mode optimized.
+  - Responsive Sidebar/Panel design.
+  - High-end typography (Inter font).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend**: Next.js 15 (App Router, Turbopack)
+- **Backend/Database**: Convex (Serverless)
+- **Authentication**: Clerk
+- **Styling**: Tailwind CSS 4
+- **Components**: Radix UI + Custom shadcn-like components
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Deployment (Render / Vercel)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Backend (Convex)
+1. Go to [Convex Dashboard](https://dashboard.convex.dev/).
+2. Create a new project.
+3. Copy your `CONVEX_DEPLOYMENT` and `NEXT_PUBLIC_CONVEX_URL`.
+
+### Frontend
+1. Connect your GitHub repository to Render or Vercel.
+2. Add the following Environment Variables:
+   - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+   - `CLERK_SECRET_KEY`
+   - `NEXT_PUBLIC_CONVEX_URL`
+3. Build Command: `npm run build`
+4. Start Command: `npm run start`
+
+---
+
+## 🛠️ Local Development
+
+1. **Clone the repository**:
+```bash
+git clone https://github.com/ShreyashPatil530/One-To-One-Real-time-Chat-App.git
+```
+
+2. **Install dependencies**:
+```bash
+npm install
+```
+
+3. **Setup environment**:
+Create `.env.local` with your Clerk and Convex keys.
+
+4. **Run the backend**:
+```bash
+npx convex dev
+```
+
+5. **Run the application**:
+```bash
+npm run dev
+```
+
+---
+
+## 📝 License
+MIT License - open for customization and improvement.
