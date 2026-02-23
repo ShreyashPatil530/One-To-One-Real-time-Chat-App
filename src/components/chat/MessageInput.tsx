@@ -3,12 +3,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useMutation, useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { Send, Smile, Paperclip, MoreHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-import { Id } from "../../../convex/_generated/dataModel";
+import { Id } from "@convex/_generated/dataModel";
 
 export default function MessageInput({ conversationId }: { conversationId: Id<"conversations"> }) {
     const [content, setContent] = useState("");
