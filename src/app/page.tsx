@@ -7,7 +7,7 @@ import ChatPanel from "@/components/chat/ChatPanel";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Id } from "@convex/_generated/dataModel";
+import { Id } from "../../convex/_generated/dataModel";
 
 export default function ChatPage() {
   const [activeConversationId, setActiveConversationId] = useState<Id<"conversations"> | null>(null);

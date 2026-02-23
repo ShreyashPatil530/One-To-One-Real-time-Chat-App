@@ -2,14 +2,14 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { api } from "@convex/_generated/api";
+import { api } from "../../convex/_generated/api";
 import { useRef, useEffect, useState } from "react";
 import { format, isToday, isYesterday, isThisYear } from "date-fns";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronDown, CheckCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { Id } from "@convex/_generated/dataModel";
+import { Id } from "../../convex/_generated/dataModel";
 
 interface MessageListProps {
     conversationId: Id<"conversations">;
