@@ -2,7 +2,7 @@
 "use client";
 
 import { useQuery, useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { api } from "../../../convex/_generated/api";
 import { useState, useRef, useEffect } from "react";
 import { Send, Phone, Video, MoreVertical, Sparkles, ArrowLeft } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../../convex/_generated/dataModel";
 
 interface ChatPanelProps {
     conversationId: Id<"conversations"> | null;

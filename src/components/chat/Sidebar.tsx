@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { api } from "../../../convex/_generated/api";
 import { Search, MessageSquare, Users, UserCircle2, LogOut } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,7 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "../../../convex/_generated/dataModel";
 
 interface SidebarProps {
     onSelectConversation: (id: Id<"conversations">) => void;
